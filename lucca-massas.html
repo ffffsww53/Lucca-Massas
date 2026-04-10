@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucca Massas — Pizzaria Artesanal & Especialidades</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== VARIÁVEIS E RESET ===== */
+  :root {
+    --vinho: #6B1A2A;
+    --vinho-escuro: #4A0F1C;
+    --vinho-claro: #8B2E42;
+    --dourado: #C9A84C;
+    --dourado-claro: #E8C97A;
+    --dourado-escuro: #A07830;
+    --creme: #F5EDD8;
+    --creme-escuro: #E8D9B8;
+    --preto: #1A1008;
+    --preto-suave: #2C1810;
+    --branco: #FEFAF2;
+    --cinza: #8A7A6A;
+    --sombra: 0 4px 24px rgba(26,16,8,0.18);
+    --sombra-leve: 0 2px 12px rgba(26,16,8,0.10);
+    --radius: 4px;
+    --radius-lg: 8px;
+    --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--vinho-escuro);
+    color: var(--creme);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== PADRÃO DE FUNDO ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== LAYOUT ===== */
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ===== HERO / HEADER ===== */
+  .hero {
+    background: linear-gradient(160deg, var(--vinho-escuro) 0%, var(--vinho) 60%, var(--vinho-escuro) 100%);
+    padding: 0;
+    border-bottom: 2px solid var(--dourado);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    text-align: left;
+    padding: 28px 0 24px;
+  }
+
+  .brand-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--dourado);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.85;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 700;
+    color: var(--branco);
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+
+  .brand-name span {
+    color: var(--dourado);
+  }
+
+  .brand-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(14px, 2vw, 20px);
+    color: var(--creme-escuro);
+    margin-top: 6px;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+    margin: 10px 0 0;
+  }
+
+  .hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+    padding: 28px 0 24px;
+  }
+
+  .hero-info-item {
+    font-size: 13px;
+    color: var(--creme-escuro);
+    opacity: 0.85;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-info-item strong {
+    color: var(--dourado);
+    font-weight: 600;
+  }
+
+  /* ===== NAVEGAÇÃO CATEGORIAS ===== */
+  .nav-cats {
+    background: var(--vinho-escuro);
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .nav-cats-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-cats-inner::-webkit-scrollbar { display: none; }
+
+  .nav-cat-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--creme-escuro);
+    padding: 14px 20px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+    opacity: 0.7;
+  }
+
+  .nav-cat-btn:hover { color: var(--dourado); opacity: 1; }
+  .nav-cat-btn.active {
+    color: var(--dourado);
+    border-bottom-color: var(--dourado);
+    opacity: 1;
+  }
+
+  /* ===== LAYOUT PRINCIPAL ===== */
+  .main-layout {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .cart-sticky { position: static !important; }
+  }
+
+  /* ===== SEÇÕES DO CARDÁPIO ===== */
+  .menu-section { margin-bottom: 48px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-icon {
+    font-size: 28px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+  }
+
+  .section-title-wrap { flex: 1; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--branco);
+    line-height: 1.1;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--dourado);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent);
+  }
+
+  /* ===== GRID DE PRODUTOS ===== */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+  }
+
+  /* ===== CARD DE PRODUTO ===== */
+  .product-card {
+    background: linear-gradient(145deg, rgba(107,26,42,0.5), rgba(44,24,16,0.6));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .product-card.featured {
+    border-color: rgba(201,168,76,0.5);
+    background: linear-gradient(145deg, rgba(74,15,28,0.7), rgba(107,26,42,0.6));
+  }
+
+  .product-emoji-wrap {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.2);
+    font-size: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-emoji-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 70%);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--dourado);
+    color: var(--preto);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .product-body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--branco);
+    line-height: 1.2;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    color: var(--creme-escuro);
+    opacity: 0.75;
+    line-height: 1.5;
+    font-family: 'Cormorant Garamond', serif;
+    flex: 1;
+  }
+
+  /* ===== SELETOR DE TAMANHO ===== */
+  .size-selector {
+    display: flex;
+    gap: 6px;
+  }
+
+  .size-option {
+    flex: 1;
+    position: relative;
+  }
+
+  .size-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+
+  .size-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7px 4px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    background: rgba(0,0,0,0.2);
+    font-size: 11px;
+    color: var(--creme-escuro);
+    opacity: 0.75;
+  }
+
+  .size-option label .size-abbr {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    color: var(--dourado);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .size-option label .size-price {
+    font-size: 11px;
+    color: var(--creme-escuro);
+    opacity: 0.8;
+  }
+
+  .size-option input:checked + label {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--dourado);
+    opacity: 1;
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.3);
+  }
+
+  .size-option label:hover { opacity: 1; border-color: rgba(201,168,76,0.5); }
+
+  /* ===== PREÇO FIXO ===== */
+  .fixed-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(201,168,76,0.1);
+    border-radius: var(--radius);
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .fixed-price-label {
+    font-size: 12px;
+    color: var(--creme-escuro);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .fixed-price-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dourado);
+  }
+
+  /* ===== BOTÃO REMOVER INGREDIENTES ===== */
+  .btn-customize {
+    background: none;
+    border: 1px dashed rgba(201,168,76,0.35);
+    color: var(--dourado);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    padding: 7px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    width: 100%;
+    transition: var(--transition);
+    opacity: 0.85;
+  }
+
+  .btn-customize:hover { background: rgba(201,168,76,0.08); opacity: 1; }
+
+  /* ===== MODAL INGREDIENTES ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--vinho-escuro);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--branco);
+    margin-bottom: 6px;
+  }
+
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--dourado);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    margin-bottom: 20px;
+    opacity: 0.85;
+  }
+
+  .ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .ingredient-item:hover { background: rgba(201,168,76,0.07); }
+
+  .ingredient-item input[type="checkbox"] { accent-color: var(--dourado); width: 16px; height: 16px; }
+
+  .ingredient-item label {
+    font-size: 14px;
+    color: var(--creme);
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .ingredient-item.unchecked label { text-decoration: line-through; color: var(--cinza); }
+
+  .modal-actions { display: flex; gap: 10px; }
+
+  .btn-modal-cancel {
+    flex: 1;
+    background: none;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--creme-escuro);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-modal-cancel:hover { background: rgba(255,255,255,0.05); }
+
+  .btn-modal-confirm {
+    flex: 2;
+    background: var(--dourado);
+    border: none;
+    color: var(--preto);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+  }
+
+  .btn-modal-confirm:hover { background: var(--dourado-claro); }
+
+  /* ===== BOTÃO ADICIONAR ===== */
+  .btn-add {
+    width: 100%;
+    background: var(--vinho);
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--creme);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 11px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-add:hover {
+    background: var(--vinho-claro);
+    border-color: var(--dourado);
+    color: var(--branco);
+  }
+
+  .btn-add::before { content: '+'; font-size: 16px; font-weight: 300; }
+
+  /* ===== CARRINHO ===== */
+  .cart-sticky {
+    position: sticky;
+    top: 52px;
+  }
+
+  .cart-panel {
+    background: linear-gradient(160deg, rgba(44,24,16,0.95), rgba(26,16,8,0.98));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+  }
+
+  .cart-header {
+    padding: 18px 20px 16px;
+    background: rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--branco);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cart-count {
+    background: var(--dourado);
+    color: var(--preto);
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-body { padding: 16px 20px; }
+
+  .cart-empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--cinza);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  .cart-empty::before {
+    content: '🍕';
+    display: block;
+    font-size: 32px;
+    margin-bottom: 10px;
+    filter: grayscale(1) opacity(0.4);
+  }
+
+  /* ===== ITEMS DO CARRINHO ===== */
+  .cart-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .cart-item:last-child { border-bottom: none; }
+
+  .cart-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--branco);
+    line-height: 1.3;
+  }
+
+  .cart-item-meta {
+    font-size: 11px;
+    color: var(--dourado);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  .cart-item-removed {
+    font-size: 11px;
+    color: var(--cinza);
+    margin-top: 3px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .cart-item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dourado);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .qty-btn {
+    width: 24px; height: 24px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--dourado);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    line-height: 1;
+  }
+
+  .qty-btn:hover { background: rgba(201,168,76,0.2); }
+
+  .qty-display {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--creme);
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .remove-btn {
+    background: none;
+    border: none;
+    color: rgba(201,168,76,0.4);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 4px;
+    transition: var(--transition);
+    line-height: 1;
+  }
+
+  .remove-btn:hover { color: #e05555; }
+
+  /* ===== RESUMO FINANCEIRO ===== */
+  .cart-summary {
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--creme-escuro);
+    opacity: 0.8;
+  }
+
+  .summary-row.total {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--branco);
+    opacity: 1;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .summary-row.total span:last-child { color: var(--dourado); }
+
+  /* ===== PEDIDO MÍNIMO ===== */
+  .min-order-alert {
+    background: rgba(224,85,85,0.12);
+    border: 1px solid rgba(224,85,85,0.3);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #f08080;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  /* ===== CEP / FRETE ===== */
+  .frete-section {
+    margin: 16px 0 12px;
+    padding: 14px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: var(--radius);
+  }
+
+  .frete-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--dourado);
+    margin-bottom: 8px;
+    display: block;
+    opacity: 0.85;
+  }
+
+  .frete-input-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .frete-input {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: var(--radius);
+    color: var(--creme);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+    outline: none;
+    transition: var(--transition);
+  }
+
+  .frete-input:focus { border-color: rgba(201,168,76,0.5); }
+  .frete-input::placeholder { color: var(--cinza); opacity: 0.7; }
+
+  .btn-frete {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--dourado);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-frete:hover { background: rgba(201,168,76,0.25); border-color: var(--dourado); }
+
+  .frete-result {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--creme);
+    display: none;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .frete-result.show { display: flex; }
+  .frete-result strong { color: var(--dourado); }
+
+  /* ===== BOTÃO FINALIZAR ===== */
+  .btn-finalizar {
+    width: 100%;
+    background: linear-gradient(135deg, var(--dourado-escuro), var(--dourado));
+    border: none;
+    color: var(--preto);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-finalizar:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--dourado), var(--dourado-claro));
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+  }
+
+  .btn-finalizar:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ===== RODAPÉ ===== */
+  footer {
+    background: var(--preto);
+    border-top: 2px solid var(--dourado);
+    padding: 40px 20px 24px;
+    margin-top: 48px;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .footer-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--dourado);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--cinza);
+    line-height: 1.7;
+  }
+
+  .footer-text strong { color: var(--creme-escuro); }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--cinza);
+    opacity: 0.6;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .footer-ps {
+    font-size: 13px;
+    color: var(--cinza);
+    opacity: 0.8;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  /* ===== ANIMAÇÕES ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card {
+    animation: fadeInUp 0.4s ease both;
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.05s; }
+  .product-card:nth-child(2) { animation-delay: 0.10s; }
+  .product-card:nth-child(3) { animation-delay: 0.15s; }
+  .product-card:nth-child(4) { animation-delay: 0.20s; }
+  .product-card:nth-child(5) { animation-delay: 0.25s; }
+  .product-card:nth-child(6) { animation-delay: 0.30s; }
+
+  /* ===== RESPONSIVO ===== */
+  @media (max-width: 600px) {
+    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-info { text-align: center; }
+    .hero-divider { margin: 10px auto 0; }
+    .products-grid { grid-template-columns: 1fr; }
+    .brand { padding: 20px 0 16px; }
+  }
+
+  /* ===== TOASTIE (FEEDBACK) ===== */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--vinho-escuro);
+    border: 1px solid var(--dourado);
+    color: var(--creme);
+    padding: 12px 20px;
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+    z-index: 2000;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <p class="brand-eyebrow">✦ Desde 2015 · Feito com amor ✦</p>
+      <h1 class="brand-name">LUCCA <span>MASSAS</span></h1>
+      <p class="brand-subtitle">Pizzaria Artesanal &amp; Especialidades</p>
+      <div class="hero-divider"></div>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item">📍 Entrega na sua cidade</div>
+      <div class="hero-info-item">📞 <strong>(21) 96751-9632</strong></div>
+      <div class="hero-info-item">🕐 Seg–Sex: 18h–23h · Sáb–Dom: 17h–00h</div>
+      <div class="hero-info-item">⏱ Tempo médio: <strong>40–60 min</strong></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV CATEGORIAS ===== -->
+<nav class="nav-cats">
+  <div class="nav-cats-inner">
+    <button class="nav-cat-btn active" onclick="scrollToSection('pizzas-salgadas')">🍕 Pizzas Salgadas</button>
+    <button class="nav-cat-btn" onclick="scrollToSection('pizza-doce')">🍫 Pizza Doce</button>
+    <button class="nav-cat-btn" onclick="scrollToSection('esfihas')">🫓 Esfihas</button>
+    <button class="nav-cat-btn" onclick="scrollToSection('bebidas')">🥤 Bebidas</button>
+  </div>
+</nav>
+
+<!-- ===== LAYOUT PRINCIPAL ===== -->
+<div class="main-layout">
+
+  <!-- ===== CARDÁPIO ===== -->
+  <main>
+
+    <!-- PIZZAS SALGADAS -->
+    <section class="menu-section" id="pizzas-salgadas">
+      <div class="section-header">
+        <div class="section-icon">🍕</div>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Pizzas Salgadas</h2>
+          <p class="section-desc">Massa artesanal fermentada por 72h · Ingredientes frescos selecionados</p>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="products-grid" id="grid-pizzas-salgadas"></div>
+    </section>
+
+    <!-- PIZZA DOCE -->
+    <section class="menu-section" id="pizza-doce">
+      <div class="section-header">
+        <div class="section-icon">🍫</div>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Pizza Doce</h2>
+          <p class="section-desc">Sobremesa irresistível · Perfeita para compartilhar</p>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="products-grid" id="grid-pizza-doce"></div>
+    </section>
+
+    <!-- ESFIHAS -->
+    <section class="menu-section" id="esfihas">
+      <div class="section-header">
+        <div class="section-icon">🫓</div>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Esfihas</h2>
+          <p class="section-desc">Tamanho individual · Massa artesanal crocante por fora, macia por dentro</p>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="products-grid" id="grid-esfihas"></div>
+    </section>
+
+    <!-- BEBIDAS -->
+    <section class="menu-section" id="bebidas">
+      <div class="section-header">
+        <div class="section-icon">🥤</div>
+        <div class="section-title-wrap">
+          <h2 class="section-title">Bebidas</h2>
+          <p class="section-desc">Geladas e prontas para acompanhar sua pizza</p>
+        </div>
+        <div class="section-line"></div>
+      </div>
+      <div class="products-grid" id="grid-bebidas"></div>
+    </section>
+
+  </main>
+
+  <!-- ===== CARRINHO ===== -->
+  <aside class="cart-sticky">
+    <div class="cart-panel">
+      <div class="cart-header">
+        <div class="cart-title">
+          Seu Pedido
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--dourado);opacity:0.75;">resumo</span>
+      </div>
+      <div class="cart-body">
+        <div id="cart-items-container">
+          <div class="cart-empty" id="cart-empty-msg">Nenhum item ainda.<br>Escolha suas delícias!</div>
+        </div>
+
+        <div id="cart-summary-section" style="display:none;">
+          <!-- Pedido mínimo -->
+          <div class="min-order-alert" id="min-order-alert" style="display:none;">
+            ⚠️ Pedido mínimo: R$&nbsp;25,00. Faltam <span id="min-order-remaining"></span>.
+          </div>
+
+          <!-- Frete -->
+          <div class="frete-section">
+            <span class="frete-label">📦 Calcular frete</span>
+            <div class="frete-input-row">
+              <input type="text" class="frete-input" id="cep-input" placeholder="Digite seu CEP" maxlength="9" oninput="maskCEP(this)">
+              <button class="btn-frete" onclick="calcularFrete()">Calcular</button>
+            </div>
+            <div class="frete-result" id="frete-result">
+              🚚 Frete: <strong id="frete-valor"></strong>
+            </div>
+          </div>
+
+          <!-- Totais -->
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal-val">R$ 0,00</span>
+            </div>
+            <div class="summary-row" id="frete-row" style="display:none;">
+              <span>Frete</span>
+              <span id="frete-display-val"></span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="total-val">R$ 0,00</span>
+            </div>
+          </div>
+
+          <button class="btn-finalizar" id="btn-finalizar" onclick="finalizarPedido()" disabled>
+            <span>Finalizar via</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ===== RODAPÉ ===== -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-block-title">Lucca Massas</p>
+      <p class="footer-text" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--creme-escuro);opacity:0.85;margin-bottom:8px;">"Onde cada pizza é uma obra de arte"</p>
+      <p class="footer-text">Pizzaria artesanal com amor e dedicação. Massa fermentada naturalmente, ingredientes frescos e muito sabor.</p>
+    </div>
+    <div>
+      <p class="footer-block-title">Horário de Funcionamento</p>
+      <p class="footer-text">
+        <strong>Segunda a Sexta</strong><br>18h00 às 23h00<br><br>
+        <strong>Sábado e Domingo</strong><br>17h00 às 00h00
+      </p>
+    </div>
+    <div>
+      <p class="footer-block-title">Contato</p>
+      <p class="footer-text">
+        📞 <strong>(21) 96751-9632</strong><br><br>
+        📱 Pedidos via WhatsApp<br><br>
+        🛵 Entrega em toda a região
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Lucca Massas · Todos os direitos reservados</p>
+    <p class="footer-ps">P.S.: O Lucas também ama esfihas e Flamengo 🔴⚫</p>
+  </div>
+</footer>
+
+<!-- MODAL INGREDIENTES -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3 class="modal-title" id="modal-product-name">Personalizar Pizza</h3>
+    <p class="modal-subtitle">Desmarque os ingredientes que deseja remover</p>
+    <div class="ingredients-list" id="modal-ingredients-list"></div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-modal-confirm" onclick="confirmCustomization()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DADOS DO CARDÁPIO =====
+const SIZES = [
+  { id: 'P', label: 'Pequena', price: 25 },
+  { id: 'M', label: 'Média',   price: 35 },
+  { id: 'G', label: 'Grande',  price: 45 },
+];
+
+const MENU = {
+  'pizzas-salgadas': {
+    gridId: 'grid-pizzas-salgadas',
+    items: [
+      {
+        id: 'marguerita', name: 'Marguerita', emoji: '🍕',
+        desc: 'Molho de tomate, mussarela fresca, manjericão fresco e azeite extravirgem.',
+        ingredients: ['Molho de tomate', 'Mussarela', 'Manjericão', 'Azeite', 'Sal'],
+        hasSizes: true, hasCustom: true
+      },
+      {
+        id: 'calabresa', name: 'Calabresa', emoji: '🌶️',
+        desc: 'Calabresa artesanal fatiada, cebola roxa, azeitona preta e orégano.',
+        ingredients: ['Molho de tomate', 'Calabresa', 'Cebola roxa', 'Azeitona preta', 'Orégano', 'Mussarela'],
+        hasSizes: true, hasCustom: true
+      },
+      {
+        id: 'frango-catupiry', name: 'Frango com Catupiry', emoji: '🍗',
+        desc: 'Frango desfiado temperado, catupiry original cremoso e milho dourado.',
+        ingredients: ['Molho de tomate', 'Frango desfiado', 'Catupiry', 'Milho', 'Mussarela'],
+        hasSizes: true, hasCustom: true
+      },
+      {
+        id: 'portuguesa', name: 'Portuguesa', emoji: '🥚',
+        desc: 'Presunto, ovo, pimentão, cebola, azeitona verde e mussarela.',
+        ingredients: ['Molho de tomate', 'Mussarela', 'Presunto', 'Ovo', 'Pimentão', 'Cebola', 'Azeitona verde'],
+        hasSizes: true, hasCustom: true
+      },
+      {
+        id: 'quatro-queijos', name: '4 Queijos', emoji: '🧀',
+        desc: 'Mussarela, provolone, parmesão e gorgonzola. Puro prazer.',
+        ingredients: ['Mussarela', 'Provolone', 'Parmesão', 'Gorgonzola', 'Azeite', 'Orégano'],
+        hasSizes: true, hasCustom: true
+      },
+    ]
+  },
+  'pizza-doce': {
+    gridId: 'grid-pizza-doce',
+    items: [
+      {
+        id: 'nutella-banana', name: 'Nutella com Banana Cristalizada', emoji: '🍌',
+        desc: 'Massa doce, creme de Nutella, banana cristalizada crocante e leite condensado.',
+        ingredients: ['Massa doce', 'Nutella', 'Banana cristalizada', 'Leite condensado'],
+        hasSizes: true, hasCustom: true, featured: true
+      },
+    ]
+  },
+  'esfihas': {
+    gridId: 'grid-esfihas',
+    items: [
+      { id: 'esfiha-marguerita', name: 'Esfiha Marguerita', emoji: '🫓', desc: 'Molho de tomate, mussarela e manjericão.', ingredients: ['Molho de tomate', 'Mussarela', 'Manjericão'], hasSizes: false, hasCustom: true, price: 8 },
+      { id: 'esfiha-calabresa', name: 'Esfiha Calabresa', emoji: '🌶️', desc: 'Calabresa fatiada, cebola e azeitona.', ingredients: ['Calabresa', 'Cebola', 'Azeitona', 'Mussarela'], hasSizes: false, hasCustom: true, price: 9 },
+      { id: 'esfiha-frango', name: 'Esfiha Frango c/ Catupiry', emoji: '🍗', desc: 'Frango desfiado e catupiry cremoso.', ingredients: ['Frango desfiado', 'Catupiry', 'Mussarela'], hasSizes: false, hasCustom: true, price: 9 },
+      { id: 'esfiha-portuguesa', name: 'Esfiha Portuguesa', emoji: '🥚', desc: 'Presunto, ovo, pimentão e azeitona.', ingredients: ['Presunto', 'Ovo', 'Pimentão', 'Cebola', 'Azeitona', 'Mussarela'], hasSizes: false, hasCustom: true, price: 9 },
+      { id: 'esfiha-quatro-queijos', name: 'Esfiha 4 Queijos', emoji: '🧀', desc: 'Blend de 4 queijos premium.', ingredients: ['Mussarela', 'Provolone', 'Parmesão', 'Gorgonzola'], hasSizes: false, hasCustom: true, price: 10 },
+    ]
+  },
+  'bebidas': {
+    gridId: 'grid-bebidas',
+    items: [
+      { id: 'coca', name: 'Coca-Cola', emoji: '🥤', desc: 'Lata 350ml, bem gelada.', hasSizes: false, hasCustom: false, price: 6 },
+      { id: 'guarana', name: 'Guaraná Antarctica', emoji: '🟢', desc: 'Lata 350ml, sabor autêntico.', hasSizes: false, hasCustom: false, price: 6 },
+      { id: 'fanta', name: 'Fanta Laranja', emoji: '🟠', desc: 'Lata 350ml, refrescante.', hasSizes: false, hasCustom: false, price: 6 },
+      { id: 'sprite', name: 'Sprite', emoji: '💧', desc: 'Lata 350ml, levinha e refrescante.', hasSizes: false, hasCustom: false, price: 6 },
+    ]
+  },
+};
+
+// ===== ESTADO =====
+let cart = [];
+let cartIdCounter = 0;
+let freightValue = null;
+
+// Customização temporária (modal)
+let pendingItem = null;
+let pendingIngredients = [];
+
+// ===== RENDERIZAR CARDÁPIO =====
+function renderMenu() {
+  Object.values(MENU).forEach(section => {
+    const grid = document.getElementById(section.gridId);
+    if (!grid) return;
+    grid.innerHTML = '';
+    section.items.forEach(item => {
+      grid.appendChild(createProductCard(item));
+    });
+  });
+}
+
+function createProductCard(item) {
+  const div = document.createElement('div');
+  div.className = 'product-card' + (item.featured ? ' featured' : '');
+  div.id = 'card-' + item.id;
+
+  let sizeHTML = '';
+  if (item.hasSizes) {
+    sizeHTML = `<div class="size-selector">
+      ${SIZES.map((s, i) => `
+        <div class="size-option">
+          <input type="radio" name="size-${item.id}" id="size-${item.id}-${s.id}" value="${s.id}" ${i === 1 ? 'checked' : ''}>
+          <label for="size-${item.id}-${s.id}">
+            <span class="size-abbr">${s.id}</span>
+            <span class="size-price">R$${s.price}</span>
+          </label>
+        </div>
+      `).join('')}
+    </div>`;
+  } else {
+    sizeHTML = `<div class="fixed-price">
+      <span class="fixed-price-label">Preço unitário</span>
+      <span class="fixed-price-value">R$ ${item.price.toFixed(2).replace('.',',')}</span>
+    </div>`;
+  }
+
+  const customBtn = item.hasCustom ? `<button class="btn-customize" onclick="openCustomize('${item.id}')">✏ Remover ingredientes</button>` : '';
+
+  div.innerHTML = `
+    <div class="product-emoji-wrap">
+      ${item.featured ? '<span class="featured-badge">✦ Especial</span>' : ''}
+      <span>${item.emoji}</span>
+    </div>
+    <div class="product-body">
+      <h3 class="product-name">${item.name}</h3>
+      <p class="product-desc">${item.desc}</p>
+      ${sizeHTML}
+      ${customBtn}
+      <button class="btn-add" onclick="addToCart('${item.id}')">Adicionar ao pedido</button>
+    </div>
+  `;
+
+  return div;
+}
+
+// ===== MODAL INGREDIENTES =====
+let modalItemId = null;
+let modalRemovedSet = new Set();
+
+function openCustomize(itemId) {
+  const item = findItem(itemId);
+  if (!item || !item.ingredients) return;
+  modalItemId = itemId;
+  modalRemovedSet = new Set();
+
+  document.getElementById('modal-product-name').textContent = 'Personalizar: ' + item.name;
+  const list = document.getElementById('modal-ingredients-list');
+  list.innerHTML = '';
+
+  item.ingredients.forEach((ing, idx) => {
+    const div = document.createElement('div');
+    div.className = 'ingredient-item';
+    div.id = 'ing-row-' + idx;
+    div.innerHTML = `
+      <input type="checkbox" id="ing-${idx}" checked onchange="toggleIngredient(${idx}, '${ing}', this.checked)">
+      <label for="ing-${idx}">${ing}</label>
+    `;
+    list.appendChild(div);
+  });
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function toggleIngredient(idx, name, checked) {
+  const row = document.getElementById('ing-row-' + idx);
+  if (!checked) {
+    modalRemovedSet.add(name);
+    row.classList.add('unchecked');
+  } else {
+    modalRemovedSet.delete(name);
+    row.classList.remove('unchecked');
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  modalItemId = null;
+  modalRemovedSet = new Set();
+}
+
+function confirmCustomization() {
+  if (modalItemId) {
+    // Armazena remoções pendentes no card para o próximo addToCart
+    const card = document.getElementById('card-' + modalItemId);
+    if (card) {
+      card.dataset.pendingRemoved = JSON.stringify([...modalRemovedSet]);
+    }
+    showToast('Personalização salva! Agora clique em "Adicionar ao pedido".');
+  }
+  closeModal();
+}
+
+// ===== ADICIONAR AO CARRINHO =====
+function findItem(id) {
+  for (const sec of Object.values(MENU)) {
+    const found = sec.items.find(i => i.id === id);
+    if (found) return found;
+  }
+  return null;
+}
+
+function addToCart(itemId) {
+  const item = findItem(itemId);
+  if (!item) return;
+
+  let size = null;
+  let price = item.price || 0;
+
+  if (item.hasSizes) {
+    const checked = document.querySelector(`input[name="size-${item.id}"]:checked`);
+    if (!checked) { showToast('Selecione um tamanho!'); return; }
+    const sizeData = SIZES.find(s => s.id === checked.value);
+    size = sizeData;
+    price = sizeData.price;
+  }
+
+  // Pegar ingredientes removidos pendentes
+  const card = document.getElementById('card-' + itemId);
+  let removed = [];
+  if (card && card.dataset.pendingRemoved) {
+    removed = JSON.parse(card.dataset.pendingRemoved);
+    delete card.dataset.pendingRemoved;
+  }
+
+  // Verificar se mesmo item (mesmo tamanho, sem remoções) já está no carrinho
+  const existing = cart.find(ci =>
+    ci.itemId === itemId &&
+    ci.sizeId === (size ? size.id : null) &&
+    JSON.stringify(ci.removed) === JSON.stringify(removed)
+  );
+
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({
+      uid: ++cartIdCounter,
+      itemId,
+      name: item.name,
+      emoji: item.emoji,
+      size,
+      price,
+      qty: 1,
+      removed
+    });
+  }
+
+  renderCart();
+  showToast(`${item.emoji} ${item.name} adicionado!`);
+}
+
+// ===== RENDERIZAR CARRINHO =====
+function renderCart() {
+  const container = document.getElementById('cart-items-container');
+  const emptyMsg = document.getElementById('cart-empty-msg');
+  const summarySection = document.getElementById('cart-summary-section');
+  const countBadge = document.getElementById('cart-count');
+
+  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+  countBadge.textContent = totalItems;
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty" id="cart-empty-msg">Nenhum item ainda.<br>Escolha suas delícias!</div>';
+    summarySection.style.display = 'none';
+    return;
+  }
+
+  // Renderizar itens
+  let html = '';
+  cart.forEach(ci => {
+    const sizeLabel = ci.size ? ` · ${ci.size.id} (${ci.size.label})` : '';
+    const removedLabel = ci.removed && ci.removed.length > 0
+      ? `<div class="cart-item-removed">Sem: ${ci.removed.join(', ')}</div>` : '';
+    const lineTotal = (ci.price * ci.qty).toFixed(2).replace('.', ',');
+
+    html += `<div class="cart-item">
+      <div>
+        <div class="cart-item-name">${ci.emoji} ${ci.name}</div>
+        <div class="cart-item-meta">${sizeLabel ? sizeLabel.slice(3) : 'Un.'}</div>
+        ${removedLabel}
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${ci.uid}, -1)">−</button>
+          <span class="qty-display">${ci.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${ci.uid}, 1)">+</button>
+          <button class="remove-btn" onclick="removeItem(${ci.uid})" title="Remover">✕</button>
+        </div>
+      </div>
+      <div class="cart-item-price">R$&nbsp;${lineTotal}</div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+  summarySection.style.display = 'block';
+
+  // Calcular totais
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const total = subtotal + (freightValue || 0);
+
+  document.getElementById('subtotal-val').textContent = formatBRL(subtotal);
+  document.getElementById('total-val').textContent = formatBRL(total);
+
+  if (freightValue !== null) {
+    document.getElementById('frete-row').style.display = 'flex';
+    document.getElementById('frete-display-val').textContent = formatBRL(freightValue);
+  }
+
+  // Pedido mínimo
+  const minAlert = document.getElementById('min-order-alert');
+  const btnFinalizar = document.getElementById('btn-finalizar');
+  if (subtotal < 25) {
+    minAlert.style.display = 'block';
+    document.getElementById('min-order-remaining').textContent = formatBRL(25 - subtotal);
+    btnFinalizar.disabled = true;
+  } else {
+    minAlert.style.display = 'none';
+    btnFinalizar.disabled = false;
+  }
+}
+
+function changeQty(uid, delta) {
+  const idx = cart.findIndex(ci => ci.uid === uid);
+  if (idx === -1) return;
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx, 1);
+  renderCart();
+}
+
+function removeItem(uid) {
+  cart = cart.filter(ci => ci.uid !== uid);
+  renderCart();
+}
+
+// ===== FRETE =====
+function maskCEP(input) {
+  let v = input.value.replace(/\D/g, '');
+  if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
+  input.value = v;
+}
+
+function calcularFrete() {
+  const cep = document.getElementById('cep-input').value.replace(/\D/g, '');
+  if (cep.length < 8) { showToast('CEP inválido. Digite 8 dígitos.'); return; }
+
+  const primeiro = cep[0];
+  const fretes = { '1': 5, '2': 7, '3': 10 };
+  freightValue = fretes[primeiro] !== undefined ? fretes[primeiro] : 15;
+
+  const el = document.getElementById('frete-result');
+  document.getElementById('frete-valor').textContent = formatBRL(freightValue);
+  el.classList.add('show');
+
+  renderCart();
+  showToast(`Frete calculado: ${formatBRL(freightValue)}`);
+}
+
+// ===== FINALIZAR PEDIDO VIA WHATSAPP =====
+function finalizarPedido() {
+  if (cart.length === 0) return;
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  if (subtotal < 25) return;
+
+  let linhas = ['🍕 *PEDIDO — LUCCA MASSAS*', ''];
+
+  cart.forEach(ci => {
+    const sizeText = ci.size ? ` (${ci.size.id} - ${ci.size.label})` : '';
+    const removedText = ci.removed && ci.removed.length > 0 ? ` | Sem: ${ci.removed.join(', ')}` : '';
+    const lineTotal = formatBRL(ci.price * ci.qty);
+    linhas.push(`• ${ci.qty}x ${ci.name}${sizeText}${removedText} → ${lineTotal}`);
+  });
+
+  linhas.push('');
+  linhas.push(`💰 Subtotal: ${formatBRL(subtotal)}`);
+  if (freightValue !== null) {
+    linhas.push(`🚚 Frete: ${formatBRL(freightValue)}`);
+    linhas.push(`✅ *Total: ${formatBRL(subtotal + freightValue)}*`);
+  } else {
+    linhas.push(`✅ *Total (sem frete calculado): ${formatBRL(subtotal)}*`);
+  }
+
+  const cepInput = document.getElementById('cep-input').value;
+  if (cepInput) linhas.push(`\n📍 CEP: ${cepInput}`);
+
+  linhas.push('');
+  linhas.push('_Pedido realizado pelo site Lucca Massas_ 🔴⚫');
+
+  const msg = encodeURIComponent(linhas.join('\n'));
+  const url = `https://wa.me/5521967519632?text=${msg}`;
+  window.open(url, '_blank');
+}
+
+// ===== UTILITÁRIOS =====
+function formatBRL(v) {
+  return 'R$ ' + v.toFixed(2).replace('.', ',');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.querySelectorAll('.nav-cat-btn').forEach((btn, i) => {
+    const ids = ['pizzas-salgadas', 'pizza-doce', 'esfihas', 'bebidas'];
+    btn.classList.toggle('active', ids[i] === id);
+  });
+}
+
+// Fechar modal clicando fora
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ===== INICIALIZAR =====
+renderMenu();
+</script>
+</body>
+</html>
